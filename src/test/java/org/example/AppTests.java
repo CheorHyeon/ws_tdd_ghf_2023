@@ -180,4 +180,35 @@ public class AppTests {
                 .contains("1번 명언은 존재하지 않습니다.");
     }
 
+    @Test
+    @DisplayName("명언 수정")
+    public void t11() {
+        String rs = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                목록
+                삭제?id=1
+                삭제?id=1
+                수정?id=2
+                현재와 자신을 사랑하라.
+                홍길동
+                목록
+                """.stripIndent().trim());
+
+        assertThat(rs)
+                .contains("번호 / 작가 / 명언")
+                .contains("______________________________")
+                .contains("2 / 작자미상 / 과거에 집착하지 마라.")
+                .contains("1 / 작자미상 / 현재를 사랑하라.")
+                .contains("1번 명언이 삭제되었습니다.")
+                .contains("1번 명언은 존재하지 않습니다.")
+                .contains("명언(기존) : 과거에 집착하지 마라.")
+                .contains("작가(기존) : 작자미상")
+                .contains("2 / 홍길동 / 현재와 자신을 사랑하라.");
+    }
+
 }
