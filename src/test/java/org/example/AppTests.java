@@ -36,16 +36,15 @@ public class AppTests {
         assertEquals("안녕", rs);
     }
 
+
+    //테스트유틸 테스트 끝
+
+    //앱 테스트 시작
     @Test
     @DisplayName("프로그램 시작시 타이틀 출력 그리고 종료")
-    public void t3() {
-        Scanner sc = TestUtil.genScanner("종료"); // 문자열 입력
-        ByteArrayOutputStream output = TestUtil.setOutToByteArray(); // 화면출력금지 시작
-
-        new App(sc).run();
-
-        String rs = output.toString(); //그동안 출력되지 않던 문자열들 문자열 변환
-        TestUtil.clearSetOutToByteArray(output); //화면 출력금지 끝
+    public void t3()
+    {
+        String rs = AppTestRunner.run("");
 
         assertThat(rs)
                 .contains("== 명언앱 ==")
@@ -53,25 +52,11 @@ public class AppTests {
                 .contains("프로그램이 종료되었습니다.")
                 .doesNotContain("올바르지 않은 명령입니다.");
     }
-
     @Test
-    @DisplayName("잘못된 명령어 입력에 대한 처리")
-    public void t4() {
-        Scanner sc = TestUtil.genScanner("""
-        종료2
-        종료
-        """.stripIndent().trim()); // 문자열 입력
-        ByteArrayOutputStream output = TestUtil.setOutToByteArray(); // 화면출력금지 시작
-
-        new App(sc).run();
-
-        String rs = output.toString(); //그동안 출력되지 않던 문자열들 문자열 변환
-        TestUtil.clearSetOutToByteArray(output); //화면 출력금지 끝
-
-        assertThat(rs)
-                .contains("올바르지 않은 명령입니다.");
+  @DisplayName("잘못된 명령어 입력에 대한 처리")
+  public void t4() {
+      String rs = AppTestRunner.run("종료2");
+       assertThat(rs)
+             .contains("올바르지 않은 명령입니다.");
     }
-    //테스트유틸 테스트 끝
-
-    //앱 테스트 시작
 }
