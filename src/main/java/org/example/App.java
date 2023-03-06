@@ -1,5 +1,7 @@
 package org.example;
 import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -11,7 +13,7 @@ public class App {
 
     public void run() {
         System.out.println("== 명언앱 ==");
-
+        List<WiseSaying> wiseSayingList = new ArrayList<>();
         long lastWiseSayingId = 0;
 
         while  (true) {
@@ -29,7 +31,14 @@ public class App {
                     String authorName = sc.nextLine().trim();
 
                     long id = ++lastWiseSayingId;
+                    wiseSayingList.add(new WiseSaying(id, content, authorName));
                     System.out.printf("%d번 명언이 등록되었습니다.", id);
+                    break;
+                case "목록" :
+                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("_".repeat(30));
+                    for(int k = wiseSayingList.size()-1 ; k>=0 ; k--)
+                    System.out.printf("%d / %s / %s\n", wiseSayingList.get(k).id, wiseSayingList.get(k).author, wiseSayingList.get(k).content);
                     break;
 
                 default:
