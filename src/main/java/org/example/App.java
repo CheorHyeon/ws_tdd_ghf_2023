@@ -41,6 +41,28 @@ public class App {
                     System.out.printf("%d / %s / %s\n", wiseSayingList.get(k).id, wiseSayingList.get(k).author, wiseSayingList.get(k).content);
                     break;
 
+                case "삭제?id=1" :
+                    String[] arr = cmd.split("=");
+                    long deleteId = Long.parseLong(arr[1]);
+                    WiseSaying 삭제명언 = null;
+                    for(int j=0; j<wiseSayingList.size() ; j++)
+                    {
+                        if(wiseSayingList.get(j).id == deleteId) {
+                           삭제명언 = wiseSayingList.get(j);
+                        }
+                    }
+
+                    if(삭제명언 !=null) {
+                        System.out.printf("%d번 명언이 삭제되었습니다.", deleteId);
+                        wiseSayingList.remove(삭제명언);
+                    }
+                    else
+                        System.out.printf("%d번 명언은 존재하지 않습니다.",deleteId);
+
+                    break;
+
+
+
                 default:
                     System.out.println("올바르지 않은 명령입니다.");
                     break;
