@@ -61,6 +61,30 @@ public class App {
 
                     break;
 
+                case "수정?id=2" :
+                    String[] arrModify = cmd.split("=");
+                    long modifyId = Long.parseLong(arrModify[1]);
+                    WiseSaying 수정명언 = null;
+
+                    for(int j=0; j<wiseSayingList.size() ; j++)
+                    {
+                        if(wiseSayingList.get(j).id == modifyId) {
+                            수정명언 = wiseSayingList.get(j);
+                        }
+                    }
+
+                    if(수정명언 !=null) {
+                        System.out.printf("명언(기존) : %s", 수정명언.content);
+                        System.out.print("명언 : ");
+                        수정명언.content = sc.nextLine().trim();
+                        System.out.printf("작가(기존) : %s", 수정명언.author);
+                        System.out.print("작가 : ");
+                        수정명언.author = sc.nextLine().trim();
+                    }
+                    else
+                        System.out.printf("%d번 명언은 존재하지 않습니다.", modifyId);
+
+                    break;
 
 
                 default:
