@@ -49,7 +49,27 @@ public class AppTests {
 
         assertThat(rs)
                 .contains("== 명언앱 ==")
-                        .contains("명령) ");
+                .contains("명령) ")
+                .contains("프로그램이 종료되었습니다.")
+                .doesNotContain("올바르지 않은 명령입니다.");
+    }
+
+    @Test
+    @DisplayName("잘못된 명령어 입력에 대한 처리")
+    public void t4() {
+        Scanner sc = TestUtil.genScanner("""
+        종료2
+        종료
+        """.stripIndent().trim()); // 문자열 입력
+        ByteArrayOutputStream output = TestUtil.setOutToByteArray(); // 화면출력금지 시작
+
+        new App(sc).run();
+
+        String rs = output.toString(); //그동안 출력되지 않던 문자열들 문자열 변환
+        TestUtil.clearSetOutToByteArray(output); //화면 출력금지 끝
+
+        assertThat(rs)
+                .contains("올바르지 않은 명령입니다.");
     }
     //테스트유틸 테스트 끝
 
